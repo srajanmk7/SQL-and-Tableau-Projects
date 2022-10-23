@@ -16,39 +16,6 @@ select SaleDateCorrected
 from
 Datacleaning..NashvilleHousing --Corrected format
 
-
---------------------------------------------------------------------------------------
---PropertyAddress column contains null values, let's deal with that
-
-select PropertyAddress
-from Datacleaning..NashvilleHousing
-where PropertyAddress is NULL 
-
-select *
-from Datacleaning..NashvilleHousing
-order by ParcelID
-
-select *
-from Datacleaning..NashvilleHousing
-order by ParcelID
-
-
-Select a.ParcelID, a.PropertyAddress, b.ParcelID, b.PropertyAddress, 
-ISNULL(a.PropertyAddress,b.PropertyAddress)  
-From Datacleaning.dbo.NashvilleHousing a
-JOIN Datacleaning.dbo.NashvilleHousing b
-	on a.ParcelID = b.ParcelID
-	AND a.[UniqueID ] != b.[UniqueID ]
-Where a.PropertyAddress is null
-
-Update a
-SET PropertyAddress = ISNULL(a.PropertyAddress,b.PropertyAddress)
-From Datacleaning.dbo.NashvilleHousing a
-JOIN Datacleaning.dbo.NashvilleHousing b
-	on a.ParcelID = b.ParcelID
-	AND a.[UniqueID ] <> b.[UniqueID ]
-Where a.PropertyAddress is null
-
 --------------------------------------------------------------------------------------
 
 --Address is not in the correct format, let's place it into indiviual columns
